@@ -1,5 +1,3 @@
-# spec/models/white_bread_store_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe WhiteBreadStore, type: :model do

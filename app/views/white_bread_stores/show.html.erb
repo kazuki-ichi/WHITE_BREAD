@@ -26,35 +26,32 @@
         <% end %>
       </div>
     </div>
-    
-<script type="text/javascript">
-     function initMap() {
-       var test = {lat: <%= @white_bread_store.latitude %>, lng: <%= @white_bread_store.longitude %>};
-       var map = new google.maps.Map(document.getElementById('map'), {
-                 zoom: 15, 
-                 center: test
-                 });
-       var transitLayer = new google.maps.TransitLayer();
-       transitLayer.setMap(map);
-       var contentString = '住所：<%= @white_bread_store.address %>';
-       var infowindow = new google.maps.InfoWindow({
-         content: contentString
-       });
-       var marker = new google.maps.Marker({
-                     position:test,
-                     map: map,
-                     title: contentString
-                   });
-       marker.addListener('click', function() {
-         infowindow.open(map, marker);
-       });
-     }
-   </script>
-   <script async defer
-             src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= Rails.application.config.google_maps_api_key %>&callback=initMap">
-   </script>
-   <div id="map"></div>
-</div>
+    <script type="text/javascript">
+      function initMap() {
+        var test = {lat: <%= @white_bread_store.latitude %>, lng: <%= @white_bread_store.longitude %>};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15, 
+          center: test
+        });
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+        var contentString = '住所：<%= @white_bread_store.address %>';
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        var marker = new google.maps.Marker({
+          position:test,
+          map: map,
+          title: contentString
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= Rails.application.config.google_maps_api_key %>&callback=initMap"></script>
+    <div id="map"></div>
+  </div>
   <% if user_signed_in? %>
     <% if current_user.favorite?(@white_bread_store) %>
       <%= link_to unfavorite_white_bread_store_path(@white_bread_store), method: :delete, class: "unfavorite-btn" do %>
@@ -67,7 +64,6 @@
     <% end %>
   <% end %>
 </div>
-
 
 <div class="container">
   <div class="table-responsive">
@@ -99,7 +95,11 @@
       <tr>
         <th>投稿者</th>
         <td>
-          <%= image_tag @white_bread_store.user.avatar, class: "avatar-image" %>
+          <% if @white_bread_store.user.avatar.attached? %>
+            <%= image_tag @white_bread_store.user.avatar, class: "avatar-image" %>
+          <% else %>
+            <%= image_tag "default_icon.png", class: "avatar-image" %>
+          <% end %>
           <%= @white_bread_store.user.name %>
         </td>
       </tr>
@@ -113,8 +113,14 @@
   <% @white_bread_store.evaluations.each do |evaluation| %>
     <div class="card mb-3">
       <div class="card-body">
-        <p class="card-title">投稿者： <%= image_tag evaluation.user.avatar, class: "avatar-image" %><%= evaluation.user.name %></p>
-        <p class="card-text">甘さ（レベル）：<%= evaluation.sweetness || '評価がありません。'  %></p>
+        <p class="card-title">
+          <% if evaluation.user.avatar.attached? %>
+            <%= image_tag evaluation.user.avatar, class: "avatar-image" %>
+          <% else %>
+            <%= image_tag "default_icon.png", class: "avatar-image" %>
+          <% end %>
+          <%= evaluation.user.name %>
+        </p>
         <p class="card-text">食感（レベル）：<%= evaluation.texture || '評価がありません。' %></p>
         <p class="card-text">コメント：<%= evaluation.comment.presence || 'コメントはありません。' %></p>
         <% if user_signed_in? && current_user == evaluation.user %>
@@ -192,4 +198,4 @@
 <% end %>
 </div>
 
-      <%= link_to "トップへ", :white_bread_stores, class: "btn btn-secondary btn-block" %>
+<%= link_to "トップへ", :white_bread_stores, class: "btn btn-secondary btn-block" %>

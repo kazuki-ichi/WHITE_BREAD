@@ -59,24 +59,24 @@ RSpec.describe User, type: :model do
     end
 
     it 'favoriteメソッドが正しく動作していること' do
-        white_bread_store = create(:white_bread_store)
-        user = create(:user)
-        favorite = user.favorite(white_bread_store)
-        expect(favorite).to be_valid
-      end
-      
+      white_bread_store = create(:white_bread_store)
+      user = create(:user)
+      favorite = user.favorite(white_bread_store)
+      expect(favorite).to be_valid
+    end
 
-      it 'unfavoriteメソッドが正しく動作していること' do
-        white_bread_store = create(:white_bread_store)
-        user = create(:user)
-        user.favorite(white_bread_store)
-        expect { user.unfavorite(white_bread_store) }.to change { Favorite.count }.by(-1)
-      end
-      it 'favorite?メソッドが正しく動作していること' do
-        white_bread_store = create(:white_bread_store)
-        user = create(:user)
-        user.favorite(white_bread_store)
-        expect(user.favorite?(white_bread_store)).to be_truthy
-      end
-end
+    it 'unfavoriteメソッドが正しく動作していること' do
+      white_bread_store = create(:white_bread_store)
+      user = create(:user)
+      user.favorite(white_bread_store)
+      expect { user.unfavorite(white_bread_store) }.to change { Favorite.count }.by(-1)
+    end
+
+    it 'favorite?メソッドが正しく動作していること' do
+      white_bread_store = create(:white_bread_store)
+      user = create(:user)
+      user.favorite(white_bread_store)
+      expect(user.favorite?(white_bread_store)).to be_truthy
+    end
+  end
 end

@@ -18,17 +18,17 @@
     </div>
 
     <% if !current_user.guest? %>
-    <div class="AccountInformation__input-group">
-      <label class="AccountInformation__label" for="password">パスワード</label>
-      <p class="AccountInformation__value">
-        *********
-      </p>
-    </div>
-    <%= link_to "パスワード変更", edit_user_registration_path %>
-  <% else %>
-    <p>ゲストユーザーのため変更できません。</p>
-  <% end %>
-</div>
+      <div class="AccountInformation__input-group">
+        <label class="AccountInformation__label" for="password">パスワード</label>
+        <p class="AccountInformation__value">
+          *********
+        </p>
+      </div>
+      <%= link_to "パスワード変更", edit_user_registration_path %>
+    <% else %>
+      <p>ゲストユーザーのため変更できません。</p>
+    <% end %>
+  </div>
 
   <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
     <h1>プロフィール</h1>
@@ -50,11 +50,11 @@
       </p>
     </div>
 
-  <% unless current_user.guest? %>
-    <%= link_to "プロフィール変更", users_profileedit_path %>
-  <% else %>
-    <p>ゲストユーザーのため編集できません。</p>
-  <% end %>
+    <% unless current_user.guest? %>
+      <%= link_to "プロフィール変更", users_profileedit_path %>
+    <% else %>
+      <p>ゲストユーザーのため編集できません。</p>
+    <% end %>
   </div>
 
   <div class="tab-pane fade" id="nav-favorite" role="tabpanel" aria-labelledby="nav-favorite-tab">

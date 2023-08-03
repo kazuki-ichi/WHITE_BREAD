@@ -1,5 +1,3 @@
-# spec/system/white_bread_store_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe 'WhiteBreadStore', type: :system do
@@ -34,5 +32,4 @@ RSpec.describe 'WhiteBreadStore', type: :system do
       expect(page).to have_content('投稿がありません。')
     end
   end
-
 end

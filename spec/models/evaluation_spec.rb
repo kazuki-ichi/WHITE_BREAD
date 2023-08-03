@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Evaluation, type: :model do
-  let(:user) { build(:user) } # buildを使用する
+  let(:user) { build(:user) }
   let(:white_bread_store) { create(:white_bread_store) }
 
   describe '関連付け' do
