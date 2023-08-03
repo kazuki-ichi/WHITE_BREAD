@@ -1,0 +1,52 @@
+<% if flash[:notice] %>
+    <div class="alert alert-success mt-3">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+<body>
+  <header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+        <h1 class="display-4 fw-bolder">高級食パン店を探そう</h1>
+        <p class="lead fw-normal text-white-50 mb-0">自分が好きな店をみんなに共有しよう</p>
+      </div>
+    </div>
+  </header>
+     <%= form_tag white_bread_stores_path, method: :get, class: "mb-3" do %>
+    <div class="input-group">
+      <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "店舗名または住所を入力してください" %>
+      <button type="submit" class="btn-search">検索</button>
+    </div>
+  <% end %>
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <% @white_bread_stores.each do |white_bread_store| %>
+          <div class="col mb-5">
+            <div class="product-card h-100">
+          
+              <% if white_bread_store.image.attached? %>
+                <%= image_tag white_bread_store.image, class: "card-img-top" %>
+              <% else %>
+                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg">
+              <% end %>
+
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <h5 class="fw-bolder"><%= white_bread_store.name %></h5>
+                  <div class="price"><%= white_bread_store.price %>円</div>
+                </div>
+              </div>
+
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <%= link_to "詳細 ＞", white_bread_store_path(white_bread_store), class: "btn" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</body>

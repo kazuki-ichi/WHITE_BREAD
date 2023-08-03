@@ -1,0 +1,195 @@
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="alert alert-success mt-3">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if @white_bread_store.errors.any? %>
+    <div class="alert alert-danger mt-3">
+      <h4><%= pluralize(@white_bread_store.errors.count, "エラー") %>が発生しました:</h4>
+      <ul>
+        <% @white_bread_store.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="white_bread_store_image_path">
+        <% if @white_bread_store.image.attached? %>
+          <%= image_tag @white_bread_store.image %>
+        <% end %>
+      </div>
+    </div>
+    
+<script type="text/javascript">
+     function initMap() {
+       var test = {lat: <%= @white_bread_store.latitude %>, lng: <%= @white_bread_store.longitude %>};
+       var map = new google.maps.Map(document.getElementById('map'), {
+                 zoom: 15, 
+                 center: test
+                 });
+       var transitLayer = new google.maps.TransitLayer();
+       transitLayer.setMap(map);
+       var contentString = '住所：<%= @white_bread_store.address %>';
+       var infowindow = new google.maps.InfoWindow({
+         content: contentString
+       });
+       var marker = new google.maps.Marker({
+                     position:test,
+                     map: map,
+                     title: contentString
+                   });
+       marker.addListener('click', function() {
+         infowindow.open(map, marker);
+       });
+     }
+   </script>
+   <script async defer
+             src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= Rails.application.config.google_maps_api_key %>&callback=initMap">
+   </script>
+   <div id="map"></div>
+</div>
+  <% if user_signed_in? %>
+    <% if current_user.favorite?(@white_bread_store) %>
+      <%= link_to unfavorite_white_bread_store_path(@white_bread_store), method: :delete, class: "unfavorite-btn" do %>
+        <i class="fas fa-heart favorite-icon"></i>お気に入り済み
+      <% end %>
+    <% else %>
+      <%= link_to favorite_white_bread_store_path(@white_bread_store), method: :post, class: "btn favorite-btn rounded-pill" do %>
+        <i class="far fa-heart unfavorite-icon"></i>お気に入りに入れる
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tr>
+        <th>店舗名</th>
+        <td><%= @white_bread_store.name %></td> 
+      </tr>
+      <tr>
+        <th>1斤の価格</th>
+        <td><%= @white_bread_store.price %>円</td> 
+      </tr>
+      <tr>
+        <th>店舗詳細</th>
+        <td><%= @white_bread_store.detail %></td> 
+      </tr>
+      <tr>
+        <th>営業時間</th>
+        <td><%= @white_bread_store.start_time.strftime("%H:%M") %>〜<%= @white_bread_store.end_time.strftime("%H:%M") %></td> 
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= @white_bread_store.address %></td> 
+      </tr>
+      <tr>
+        <th>投稿日</th>
+        <td><%= @white_bread_store.created_at.to_s(:datetime_jp) %></td> 
+      </tr>
+      <tr>
+        <th>投稿者</th>
+        <td>
+          <%= image_tag @white_bread_store.user.avatar, class: "avatar-image" %>
+          <%= @white_bread_store.user.name %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="container">
+  <h3>評価一覧</h3>
+  <% if @white_bread_store.evaluations.any? %>
+  <% @white_bread_store.evaluations.each do |evaluation| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-title">投稿者： <%= image_tag evaluation.user.avatar, class: "avatar-image" %><%= evaluation.user.name %></p>
+        <p class="card-text">甘さ（レベル）：<%= evaluation.sweetness || '評価がありません。'  %></p>
+        <p class="card-text">食感（レベル）：<%= evaluation.texture || '評価がありません。' %></p>
+        <p class="card-text">コメント：<%= evaluation.comment.presence || 'コメントはありません。' %></p>
+        <% if user_signed_in? && current_user == evaluation.user %>
+          <%= link_to "編集", edit_evaluation_path(evaluation), class: "btn btn-warning" %>
+          <%= link_to "削除", evaluation_path(evaluation), method: :delete, data: { confirm: "評価を削除しますか？" }, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% else %>
+    <p>投稿がありません。</p>
+  <% end %>
+
+<% if user_signed_in? %>
+  <%= form_with model: @evaluation, url: evaluations_path do |f| %>
+    <%= f.hidden_field :white_bread_store_id, value: @white_bread_store.id %>
+    <div>
+      <strong>甘さ</strong>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 5, class: "form-check-input" %>
+      <%= f.label :"sweetness_5", "とても甘い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 4, class: "form-check-input" %>
+      <%= f.label :"sweetness_4", "甘い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 3, class: "form-check-input" %>
+      <%= f.label :"sweetness_3", "やや甘い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 2, class: "form-check-input" %>
+      <%= f.label :"sweetness_2", "普通", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 1, class: "form-check-input" %>
+      <%= f.label :"sweetness_1", "甘くない", class: "form-check-label" %>
+    </div>
+
+    <div>
+      <strong>食感</strong>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 5, class: "form-check-input" %>
+      <%= f.label :"texture_5", "ふわふわ", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 4, class: "form-check-input" %>
+      <%= f.label :"texture_4", "柔らかい", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 3, class: "form-check-input" %>
+      <%= f.label :"texture_3", "やや柔らかい", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 2, class: "form-check-input" %>
+      <%= f.label :"texture_2", "普通", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 1, class: "form-check-input" %>
+      <%= f.label :"texture_1", "柔らかくない", class: "form-check-label" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :コメント %>
+        <%= f.text_area :comment, class: "form-control", placeholder: "自由記入欄（例: 感想など...）" %>
+    </div>
+        <%= f.submit "評価する", class: "btn btn-success" %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="container">
+    <%= link_to "コメントを行うにはログインが必要です", new_user_session_path, class: "btn btn-success" %>
+  </div>
+<% end %>
+</div>
+
+      <%= link_to "トップへ", :white_bread_stores, class: "btn btn-secondary btn-block" %>

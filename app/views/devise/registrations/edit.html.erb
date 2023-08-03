@@ -3,31 +3,31 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: true %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div class="alert alert-info">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :新しいパスワード %> <br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "6文字以上", required: true %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :確認用パスワード %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "6文字以上", required: true %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :現在のパスワード %> <br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", required: true %>
   </div>
   <div class="actions">
-    <%= f.submit "保存" %>
+    <%= f.submit "保存", class: "btn btn-primary" %>
+    <%= link_to "戻る", users_account_path, class: "btn btn-secondary" %>
   </div>
 <% end %>
-<%= link_to "戻る", :back %>

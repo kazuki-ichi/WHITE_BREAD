@@ -16,6 +16,20 @@ ja:
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
         name: '名前'
+      white_bread_store:
+        name: '店舗名'
+        detail: '店舗詳細'
+        price: '価格'
+        start_time: '営業開始時間'
+        end_time: '営業終了時間'
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+    registrations:
+      user:
+        updated: 'アカウント情報が更新されました。'
+
   date:
     abbr_day_names:
     - 日
