@@ -62,3 +62,7 @@ gem 'devise'
 gem 'dotenv-rails'
 gem 'geocoder'
 gem 'webdrivers'
+
+group :production do
+  gem 'pg'
+end
