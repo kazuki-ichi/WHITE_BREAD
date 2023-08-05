@@ -62,7 +62,7 @@ gem 'devise'
 gem 'dotenv-rails'
 gem 'geocoder'
 gem 'webdrivers'
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk-s3', require: false
 
 group :production do
   gem 'pg'
