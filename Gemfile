@@ -62,6 +62,7 @@ gem 'devise'
 gem 'dotenv-rails'
 gem 'geocoder'
 gem 'webdrivers'
+gem 'aws-sdk', '~> 2'
 
 group :production do
   gem 'pg'
