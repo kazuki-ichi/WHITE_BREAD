@@ -37,11 +37,14 @@
                   <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
                 </ul>
               </li>
+              <button type="button" class="btn btn-outline-secondary post">
+                <%= link_to "投稿✏️", new_white_bread_store_path %>
+              </button>
             <% else %>
-              <div class="post">
-                <%= link_to "ログイン", new_user_session_path, class: 'post' %>
-                <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
-                <%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post %>
+              <div class="posts">
+                <%= link_to "ログイン", new_user_session_path, class: 'posts' %>
+                <%= link_to "新規登録", new_user_registration_path, class: 'posts' %>
+                <li><%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post %></li>
               </div>
             <% end %>
           </ul>

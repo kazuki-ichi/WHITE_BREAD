@@ -28,6 +28,26 @@
   font-weight: bold;
   color: #007bff;
 }
+.post a {
+  text-decoration: none;
+  color: #6c757d;
+  font-weight: bold;
+}
+
+.post {
+  border-radius: 25px;
+  padding: 10px 14px;
+}
+
+.post a:hover {
+  color: #ffffff;
+}
+
+.posts a {
+  text-decoration: none;
+  color: #6c757d;
+  font-weight: bold;
+}
 
 .dropdown-menu a {
   text-decoration: none;
@@ -156,7 +176,6 @@ td {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-right: 13px;
   object-fit: contain;
 }
 
@@ -297,7 +316,6 @@ header p {
   font-size: 1.2rem;
   font-weight: bold;
   color: #e9b855;
-  margin-bottom: 1rem;
 }
 
 .product-card .btn {
@@ -375,4 +393,8 @@ header p {
 
 .item-name {
   width: 100px;
+}
+
+.detail-btn{
+  margin-bottom: 1.5rem;
 }
