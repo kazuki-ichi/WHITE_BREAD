@@ -29,6 +29,7 @@ ja:
     registrations:
       user:
         updated: 'アカウント情報が更新されました。'
+        signed_up: "ユーザー登録が完了しました。"
 
   date:
     abbr_day_names:
