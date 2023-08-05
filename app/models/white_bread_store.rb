@@ -4,7 +4,6 @@ class WhiteBreadStore < ApplicationRecord
 
   has_many :favorites
   has_many :favoriting_users, through: :favorites, source: :user
-  # has_many :users, through: :favorites
 
   has_one_attached :image
   before_create :default_image

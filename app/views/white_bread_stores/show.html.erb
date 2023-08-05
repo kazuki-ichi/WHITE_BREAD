@@ -69,31 +69,31 @@
   <div class="table-responsive">
     <table class="table table-bordered">
       <tr>
-        <th>店舗名</th>
+        <th class="item-name">店舗名</th>
         <td><%= @white_bread_store.name %></td> 
       </tr>
       <tr>
-        <th>1斤の価格</th>
-        <td><%= @white_bread_store.price %>円</td> 
+        <th class="item-name">1斤の価格</th>
+        <td><%= @white_bread_store.price %>円</td>
       </tr>
       <tr>
-        <th>店舗詳細</th>
-        <td><%= @white_bread_store.detail %></td> 
+        <th class="item-name">店舗詳細</th>
+        <td><%=safe_join(@white_bread_store.detail.split("\n"),tag(:br))%></td>
       </tr>
       <tr>
-        <th>営業時間</th>
+        <th class="item-name">営業時間</th>
         <td><%= @white_bread_store.start_time.strftime("%H:%M") %>〜<%= @white_bread_store.end_time.strftime("%H:%M") %></td> 
       </tr>
       <tr>
-        <th>住所</th>
+        <th class="item-name">住所</th>
         <td><%= @white_bread_store.address %></td> 
       </tr>
       <tr>
-        <th>投稿日</th>
+        <th class="item-name">投稿日</th>
         <td><%= @white_bread_store.created_at.to_s(:datetime_jp) %></td> 
       </tr>
       <tr>
-        <th>投稿者</th>
+        <th class="item-name">投稿者</th>
         <td>
           <% if @white_bread_store.user.avatar.attached? %>
             <%= image_tag @white_bread_store.user.avatar, class: "avatar-image" %>

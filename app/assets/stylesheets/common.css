@@ -164,8 +164,8 @@ td {
   display: flex;
   align-items: center;
   color: white; 
-  border: 1px solid #000000; /* 適切な色に変更 */
-  background-color: #e4b45a; /* 適切な色に変更 */
+  border: 1px solid #000000;
+  background-color: #e4b45a;
 }
 
 .icon_path:hover {
@@ -371,4 +371,8 @@ header p {
 
 .profile-post {
   margin-bottom: 5%;
+}
+
+.item-name {
+  width: 100px;
 }

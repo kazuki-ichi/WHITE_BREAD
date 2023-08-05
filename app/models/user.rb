@@ -18,12 +18,6 @@ class User < ApplicationRecord
 
   before_create :default_image
 
-  # def default_image
-  #   if !self.avatar.attached? && self.avatar.blob.blank?
-  #     self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default_icon.png')), filename: 'default_icon.png', content_type: 'image/png')
-  #   end
-  # end
-
   def default_image
     if !self.avatar.attached? && self.avatar.blob.blank?
       default_image_path = Rails.root.join('app', 'assets', 'images', 'default_icon.png')
