@@ -121,6 +121,7 @@
           <% end %>
           <%= evaluation.user.name %>
         </p>
+        <p class="card-text">甘さ（レベル）：<%= evaluation.sweetness || '評価がありません。' %></p>
         <p class="card-text">食感（レベル）：<%= evaluation.texture || '評価がありません。' %></p>
         <p class="card-text">コメント：<%= evaluation.comment.presence || 'コメントはありません。' %></p>
         <% if user_signed_in? && current_user == evaluation.user %>
