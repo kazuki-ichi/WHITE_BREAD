@@ -22,5 +22,4 @@ test:
 
 production:
   <<: *default
-  # database: db/production.sqlite3
-  url: <%= ENV['JAWSDB_URL']&.sub('mysql://', 'mysql2://') %>
+  database: db/production.sqlite3
