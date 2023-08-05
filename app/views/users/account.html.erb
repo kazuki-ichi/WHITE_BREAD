@@ -1,0 +1,101 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="true">アカウント</button>
+    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">プロフィール</button>
+    <button class="nav-link" id="nav-favorite-tab" data-bs-toggle="tab" data-bs-target="#nav-favorite" type="button" role="tab" aria-controls="nav-favorite" aria-selected="false">お気に入り一覧</button>
+    <button class="nav-link" id="nav-comment-tab" data-bs-toggle="tab" data-bs-target="#nav-comment" type="button" role="tab" aria-controls="nav-comment" aria-selected="false">自分のコメント一覧</button>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+    <h1>アカウント</h1>
+    <div class="AccountInformation__input-group">
+      <label class="AccountInformation__label" for="email">メールアドレス</label>
+      <p class="AccountInformation__value">
+        <%= current_user.email %>
+      </p>
+    </div>
+
+    <% if !current_user.guest? %>
+      <div class="AccountInformation__input-group">
+        <label class="AccountInformation__label" for="password">パスワード</label>
+        <p class="AccountInformation__value">
+          *********
+        </p>
+      </div>
+      <%= link_to "パスワード変更", edit_user_registration_path %>
+    <% else %>
+      <p>ゲストユーザーのため変更できません。</p>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+    <h1>プロフィール</h1>
+    <div class="AccountInformation__input-group">
+      <label class="AccountInformation__label" for="image">プロフィール画像</label>
+      <p class="AccountInformation__value Account_image">
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar %>
+        <% else %>
+          <%= image_tag "default_icon.png", class: "default-avatar" %>
+        <% end %>
+      </p>
+    </div>
+
+    <div class="AccountInformation__input-group">
+      <label class="AccountInformation__label" for="name">名前</label>
+      <p class="AccountInformation__value">
+        <%= current_user.name %>
+      </p>
+    </div>
+
+    <% unless current_user.guest? %>
+      <%= link_to "プロフィール変更", users_profileedit_path %>
+    <% else %>
+      <p>ゲストユーザーのため編集できません。</p>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="nav-favorite" role="tabpanel" aria-labelledby="nav-favorite-tab">
+    <h1>お気に入り一覧</h1>
+    <div class="AccountInformation__input-group">
+      <% if current_user.favorite_white_bread_stores.any? %>
+        <% current_user.favorite_white_bread_stores.each do |white_bread_store| %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <p class="card-title">お気に入り店舗： <%= white_bread_store.name %></p>
+              <%= link_to "詳細を見る", white_bread_store_path(white_bread_store), class: "btn btn-primary" %>
+              <%= link_to "お気に入りから削除", unfavorite_white_bread_store_path(white_bread_store), method: :delete, data: { confirm: "お気に入りから削除してもよろしいですか？" }, class: "btn btn-danger" %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>お気に入りがありません。</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
+    <h1>自分のコメント一覧</h1>
+    <div class="AccountInformation__input-group">
+      <% if current_user.evaluations.any? %>
+        <% current_user.evaluations.each do |evaluation| %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <p class="card-title">評価した店舗： <%= evaluation.white_bread_store.name %></p>
+              <p class="card-text">味：<%= evaluation.taste %></p>
+              <p class="card-text">甘さ：<%= evaluation.sweetness %></p>
+              <p class="card-text">食感：<%= evaluation.texture %></p>
+              <p class="card-text">コメント：<%= evaluation.comment.presence || 'コメントはありません。' %></p>
+              <%= link_to "詳細を見る", white_bread_store_path(evaluation.white_bread_store), class: "btn btn-primary" %>
+              <%= link_to "削除", white_bread_store_evaluation_path(evaluation.white_bread_store, evaluation), method: :delete, data: { confirm: "この評価を削除してもよろしいですか？" }, class: "btn btn-danger" %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>コメントがありません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>

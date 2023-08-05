@@ -1,0 +1,60 @@
+<div class="containe">
+  <h3>投稿一覧</h3>
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>画像</th>
+        <th>店舗名</th>
+        <th>店舗詳細</th>
+        <th>1斤の料金</th>
+        <th>営業時間</th>
+        <th>住所</th>
+        <th>投稿日</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @white_bread_stores.each do |white_bread_store| %>
+        <tr>
+          <td class="white_bread_store_path">
+            <% if white_bread_store.image.attached? %>
+              <%= image_tag white_bread_store.image %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to white_bread_store.name, white_bread_store_path(white_bread_store) %>
+          </td>
+          <td>
+            <%= white_bread_store.detail %>
+          </td>
+          <td>
+            <%= white_bread_store.price %>円
+          </td>
+          <td>
+            <% if white_bread_store.start_time.present? && white_bread_store.end_time.present? %>
+              <%= white_bread_store.start_time.strftime("%H:%M") %>〜<%= white_bread_store.end_time.strftime("%H:%M") %>
+            <% end %>
+          </td> 
+          <td>
+            <%= white_bread_store.address %></td>
+          </td>
+          <td>
+            <% if white_bread_store.created_at.present? %>
+              <%= white_bread_store.created_at.to_s(:datetime_jp) %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "編集", edit_white_bread_store_path(white_bread_store), class: "btn btn-edit" %>
+            <%= link_to "削除", white_bread_store_path(white_bread_store), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

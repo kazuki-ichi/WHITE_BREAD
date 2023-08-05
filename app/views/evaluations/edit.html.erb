@@ -1,0 +1,58 @@
+<div class="container">
+  <h3>評価の編集</h3>
+  <%= form_for @evaluation do |f| %>
+    <div>
+      <strong>甘さ</strong>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 5, class: "form-check-input", checked: @evaluation.sweetness == 5 %>
+      <%= f.label :"sweetness_5", "とても甘い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 4, class: "form-check-input", checked: @evaluation.sweetness == 4 %>
+      <%= f.label :"sweetness_4", "甘い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 3, class: "form-check-input", checked: @evaluation.sweetness == 3 %>
+      <%= f.label :"sweetness_3", "やや甘い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 2, class: "form-check-input", checked: @evaluation.sweetness == 2 %>
+      <%= f.label :"sweetness_2", "普通", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :sweetness, 1, class: "form-check-input", checked: @evaluation.sweetness == 1 %>
+      <%= f.label :"sweetness_1", "甘くない", class: "form-check-label" %>
+    </div>
+  
+    <div>
+      <strong>食感</strong>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 5, class: "form-check-input", checked: @evaluation.texture == 5 %>
+      <%= f.label :"5", "ふわふわ", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 4, class: "form-check-input", checked: @evaluation.texture == 4 %>
+      <%= f.label :"4", "柔らかい", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 3, class: "form-check-input", checked: @evaluation.texture == 3 %>
+      <%= f.label :"3", "やや柔らかい", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 2, class: "form-check-input", checked: @evaluation.texture == 2 %>
+      <%= f.label :"2", "普通", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :texture, 1, class: "form-check-input", checked: @evaluation.texture == 1 %>
+      <%= f.label :"1", "柔らかくない", class: "form-check-label" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :コメント %>
+      <%= f.text_area :comment, class: "form-control", placeholder: "自由記入欄（例: 感想など...）" %>
+    </div>
+    <%= f.submit "更新", class: "btn btn-warning" %>
+  <% end %>
+</div>
