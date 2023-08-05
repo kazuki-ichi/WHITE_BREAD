@@ -368,3 +368,7 @@ header p {
 .unfavorite-btn{
   color: #ff65c9;
 }
+
+.profile-post {
+  margin-bottom: 5%;
+}

@@ -50,11 +50,11 @@
       </p>
     </div>
 
-    <% unless current_user.guest? %>
+    <%# <% unless current_user.guest? %> %>
       <%= link_to "プロフィール変更", users_profileedit_path %>
-    <% else %>
+    <%# <% else %> %>
       <p>ゲストユーザーのため編集できません。</p>
-    <% end %>
+    <%# <% end %> %>
   </div>
 
   <div class="tab-pane fade" id="nav-favorite" role="tabpanel" aria-labelledby="nav-favorite-tab">

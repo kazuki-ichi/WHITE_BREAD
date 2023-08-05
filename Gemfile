@@ -63,6 +63,7 @@ gem 'dotenv-rails'
 gem 'geocoder'
 gem 'webdrivers'
 gem 'aws-sdk-s3', require: false
+gem 'dotenv-rails'
 
 group :production do
   gem 'pg'
