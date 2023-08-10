@@ -84,8 +84,8 @@
           <div class="card mb-3">
             <div class="card-body">
               <p class="card-title">評価した店舗： <%= evaluation.white_bread_store.name %></p>
-              <p class="card-text">味：<%= evaluation.taste %></p>
               <p class="card-text">甘さ：<%= evaluation.sweetness %></p>
+              <p class="card-text">コスパ：<%= evaluation.taste %></p>
               <p class="card-text">食感：<%= evaluation.texture %></p>
               <p class="card-text">コメント：<%= evaluation.comment.presence || 'コメントはありません。' %></p>
               <%= link_to "詳細を見る", white_bread_store_path(evaluation.white_bread_store), class: "btn btn-primary" %>

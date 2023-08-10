@@ -2,11 +2,40 @@ class WhiteBreadStoresController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
+    if params[:reset_sort].present?
+      redirect_to white_bread_stores_path and return
+    end
+  
     if params[:query].present?
       @white_bread_stores = WhiteBreadStore.where("name LIKE ? OR address LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     else
       @white_bread_stores = WhiteBreadStore.all
     end
+  
+    if params[:order] == 'favorites'
+      @white_bread_stores = @white_bread_stores.includes(:favorites)
+                                                 .sort_by { |store| -store.favorites.count }
+    elsif params[:order] == 'comments'
+      @white_bread_stores = @white_bread_stores.includes(:evaluations)
+                                                 .sort_by { |store| -store.evaluations.where.not(comment: nil).count }
+    elsif params[:order] == 'price_asc'
+      @white_bread_stores = @white_bread_stores.order(price: :asc)
+    elsif params[:order] == 'price_desc'
+      @white_bread_stores = @white_bread_stores.order(price: :desc)
+    elsif params[:order] == 'recent'
+      @white_bread_stores = @white_bread_stores.order(created_at: :desc)
+    end
+    @stores_for_map = @white_bread_stores.map do |store|
+      {
+        name: store.name,
+        latitude: store.latitude,
+        longitude: store.longitude,
+        id: store.id,
+        address: store.address
+      }
+    end
+  
+    
   end
 
   def own

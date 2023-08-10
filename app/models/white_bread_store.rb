@@ -1,6 +1,6 @@
 class WhiteBreadStore < ApplicationRecord
   belongs_to :user
-  has_many :evaluations
+  has_many :evaluations, dependent: :destroy
 
   has_many :favorites
   has_many :favoriting_users, through: :favorites, source: :user

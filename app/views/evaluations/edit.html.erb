@@ -1,3 +1,13 @@
+<% if @evaluation.errors.any? %>
+  <div class="alert alert-danger mt-3">
+    <h4><%= pluralize(@evaluation.errors.count, "エラー") %>が発生しました:</h4>
+    <ul>
+      <% @evaluation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class="container">
   <h3>評価の編集</h3>
   <%= form_for @evaluation do |f| %>
@@ -23,6 +33,30 @@
     <div class="form-check form-check-inline">
       <%= f.radio_button :sweetness, 1, class: "form-check-input", checked: @evaluation.sweetness == 1 %>
       <%= f.label :"sweetness_1", "甘くない", class: "form-check-label" %>
+    </div>
+
+     <div>
+      <strong>コスパ</strong>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 5, class: "form-check-input", checked: @evaluation.texture == 5 %>
+      <%= f.label :"5", "非常に良い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 4, class: "form-check-input", checked: @evaluation.texture == 4 %>
+      <%= f.label :"4", "良い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 3, class: "form-check-input", checked: @evaluation.texture == 3 %>
+      <%= f.label :"3", "普通", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 2, class: "form-check-input", checked: @evaluation.texture == 2 %>
+      <%= f.label :"2", "やや悪い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 1, class: "form-check-input", checked: @evaluation.texture == 1 %>
+      <%= f.label :"1", "悪い", class: "form-check-label" %>
     </div>
   
     <div>
