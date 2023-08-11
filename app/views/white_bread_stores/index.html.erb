@@ -73,7 +73,8 @@
                 <div class="text-center">
                   <h5 class="fw-bolder"><%= white_bread_store.name %></h5>
                   <div class="price"><%= white_bread_store.price %>円</div>
-                  <h6>お気に入り数: <%= white_bread_store.favorites.count %></h6>
+                  <i class="fas fa-heart favorite-icon"><%= white_bread_store.favorites.count %></i>
+                  <i class="fas fa-comment comment-icon"><%= white_bread_store.evaluations.where.not(comment: nil).count %></i>
                 </div>
               </div>
               <div class="card-footer pt-0 border-top-0 bg-transparent">

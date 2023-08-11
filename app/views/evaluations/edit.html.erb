@@ -85,7 +85,7 @@
   
     <div class="form-group">
       <%= f.label :コメント %>
-      <%= f.text_area :comment, class: "form-control", placeholder: "自由記入欄（例: 感想など...）" %>
+      <%= f.text_area :comment, class: "form-control", placeholder: "自由記入欄（例: 感想など...）" , required: true %>
     </div>
     <%= f.submit "更新", class: "btn btn-warning" %>
   <% end %>
