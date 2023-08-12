@@ -58,7 +58,7 @@
       <%= f.radio_button :taste, 1, class: "form-check-input", checked: @evaluation.texture == 1 %>
       <%= f.label :"1", "悪い", class: "form-check-label" %>
     </div>
-  
+
     <div>
       <strong>食感</strong>
     </div>
@@ -82,7 +82,7 @@
       <%= f.radio_button :texture, 1, class: "form-check-input", checked: @evaluation.texture == 1 %>
       <%= f.label :"1", "柔らかくない", class: "form-check-label" %>
     </div>
-  
+
     <div class="form-group">
       <%= f.label :コメント %>
       <%= f.text_area :comment, class: "form-control", placeholder: "自由記入欄（例: 感想など...）" , required: true %>

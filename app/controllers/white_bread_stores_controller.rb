@@ -34,8 +34,6 @@ class WhiteBreadStoresController < ApplicationController
         address: store.address
       }
     end
-  
-    
   end
 
   def own
