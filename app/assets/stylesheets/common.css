@@ -17,6 +17,12 @@
   width: 50%;
 }
 
+.map-title {
+  font-size: 24px;
+  color: #333;
+  margin: 150px;
+}
+
 .container{
   padding-top: 10px;
   padding-bottom: 20px;

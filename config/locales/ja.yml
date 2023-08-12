@@ -22,6 +22,8 @@ ja:
         price: '価格'
         start_time: '営業開始時間'
         end_time: '営業終了時間'
+      evaluation:
+        comment: 'コメント'
   devise:
     sessions:
       signed_in: "ログインしました。"

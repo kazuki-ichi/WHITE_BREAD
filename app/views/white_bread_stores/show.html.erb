@@ -15,6 +15,17 @@
       </ul>
     </div>
   <% end %>
+
+  <% if @evaluation.errors.any? %>
+    <div class="alert alert-danger mt-3">
+      <h4><%= pluralize(@evaluation.errors.count, "エラー") %>が発生しました:</h4>
+      <ul>
+        <% @evaluation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 </div>
 
 <div class="container">
@@ -49,7 +60,6 @@
         });
       }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap"></script>
     <div id="map"></div>
   </div>
   <% if user_signed_in? %>
@@ -121,9 +131,10 @@
           <% end %>
           <%= evaluation.user.name %>
         </p>
-        <p class="card-text">甘さ（レベル）：<%= evaluation.sweetness || '評価がありません。' %></p>
-        <p class="card-text">食感（レベル）：<%= evaluation.texture || '評価がありません。' %></p>
-        <p class="card-text">コメント：<%= evaluation.comment.presence || 'コメントはありません。' %></p>
+        <p class="card-text">甘さ（レベル）：<%= evaluation.sweetness || '評価されませんでした。' %></p>
+        <p class="card-text">コスパ（レベル）：<%= evaluation.taste || '評価されませんでした。' %></p>
+        <p class="card-text">柔らかさ（レベル）：<%= evaluation.texture || '評価されませんでした。' %></p>
+        <p class="card-text">コメント：<%= evaluation.comment.presence %></p>
         <% if user_signed_in? && current_user == evaluation.user %>
           <%= link_to "編集", edit_evaluation_path(evaluation), class: "btn btn-warning" %>
           <%= link_to "削除", evaluation_path(evaluation), method: :delete, data: { confirm: "評価を削除しますか？" }, class: "btn btn-danger" %>
@@ -138,12 +149,13 @@
 <% if user_signed_in? %>
   <%= form_with model: @evaluation, url: evaluations_path do |f| %>
     <%= f.hidden_field :white_bread_store_id, value: @white_bread_store.id %>
+    <strong>評価しない場合には空欄にてお願いします。</strong>
     <div>
       <strong>甘さ</strong>
     </div>
     <div class="form-check form-check-inline">
       <%= f.radio_button :sweetness, 5, class: "form-check-input" %>
-      <%= f.label :"sweetness_5", "とても甘い", class: "form-check-label" %>
+      <%= f.label :"sweetness_5", "非常に甘い", class: "form-check-label" %>
     </div>
     <div class="form-check form-check-inline">
       <%= f.radio_button :sweetness, 4, class: "form-check-input" %>
@@ -163,11 +175,35 @@
     </div>
 
     <div>
-      <strong>食感</strong>
+      <strong>コスパ</strong>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 5, class: "form-check-input" %>
+      <%= f.label :"taste_5", "非常にいい", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 4, class: "form-check-input" %>
+      <%= f.label :"taste_4", "良い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 3, class: "form-check-input" %>
+      <%= f.label :"taste_3", "普通", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 2, class: "form-check-input" %>
+      <%= f.label :"taste_2", "やや悪い", class: "form-check-label" %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :taste, 1, class: "form-check-input" %>
+      <%= f.label :"taste_1", "悪い", class: "form-check-label" %>
+    </div>
+
+     <div>
+      <strong>柔らかさ</strong>
     </div>
     <div class="form-check form-check-inline">
       <%= f.radio_button :texture, 5, class: "form-check-input" %>
-      <%= f.label :"texture_5", "ふわふわ", class: "form-check-label" %>
+      <%= f.label :"texture_5", "非常に柔らかい", class: "form-check-label" %>
     </div>
     <div class="form-check form-check-inline">
       <%= f.radio_button :texture, 4, class: "form-check-input" %>
@@ -187,7 +223,7 @@
     </div>
     <div class="form-group">
         <%= f.label :コメント %>
-        <%= f.text_area :comment, class: "form-control", placeholder: "自由記入欄（例: 感想など...）" %>
+        <%= f.text_area :comment, class: "form-control", placeholder: "自由記入欄（例: 感想など...）", required: true %>
     </div>
         <%= f.submit "評価する", class: "btn btn-success" %>
     <% end %>
