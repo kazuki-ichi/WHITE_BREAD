@@ -15,4 +15,12 @@ RSpec.describe Evaluation, type: :model do
       expect(evaluation).to respond_to(:user)
     end
   end
+
+  describe 'バリデーション' do
+    it 'コメントが空欄の場合は無効であること' do
+      evaluation = Evaluation.new(white_bread_store: white_bread_store, sweetness: 3, texture: 3, user: user, comment: '')
+      expect(evaluation).to be_invalid
+      expect(evaluation.errors[:comment]).to include('を入力してください')
+    end
+  end
 end
