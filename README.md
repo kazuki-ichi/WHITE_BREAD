@@ -13,29 +13,43 @@
   * 名前、画像を編集できる。
 * ゲストログイン
   * ユーザーがゲストとしてログインできる。
+  *  <img width="176" alt="スクリーンショット 2023-08-19 16 45 53" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/33b5adaf-157c-4f58-87d9-e3700d7aca2a">
 * 店舗一覧表示
   * 高級食パンの店舗情報を一覧で表示する。
   * 店舗名、価格、お気に入り数、コメント数などを表示する。
+  * <img width="500" alt="スクリーンショット 2023-08-19 16 52 21" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/acafc790-faad-42dd-a90e-f41ed0ace804">
 * 検索機能
   * 店舗名や住所をキーワードとして検索できる。
-  * 検索結果に基づいて店舗一覧を表示する。
+  * 検索結果に基づいて店舗一覧を表示す
+  * <img width="500" alt="スクリーンショット 2023-08-19 16 55 27" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/31e72b63-ae35-4eec-a049-5e0590da1e96">
 * ソート機能
   * お気に入り数、コメント数、価格などの条件で店舗をソートできる。
   * ソートされた結果を一覧で表示する。
+  * <img width="800" alt="スクリーンショット 2023-08-19 16 57 16" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/edc0db73-9ec8-4493-b1f3-3fa3ac5ab91f">
+  * 例:コメントが多い順
+  * <img width="800" alt="スクリーンショット 2023-08-19 17 15 43" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/13f0dec8-ac1b-40f4-80e9-bf9d72eb270d">
+  * <img width="500" alt="スクリーンショット 2023-08-19 17 16 10" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/847b7cba-3ef9-4844-8d18-291e6926f43d">
 * 投稿機能
   * ユーザーが新しい店舗情報を投稿できる。
   * 店舗名、詳細説明、価格、住所、画像、営業時間などを入力する。
+  * <img width="500" alt="スクリーンショット 2023-08-19 17 22 36" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/5e025ffc-45ef-4569-97a5-b0f99bc8a81b">
   * 投稿の編集と削除
+  * <img width="500" alt="スクリーンショット 2023-08-19 17 25 32" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/838106b5-b0c3-46fd-99c1-451b28ea9991">
 * お気に入り機能
   * ユーザーが店舗をお気に入り登録、解除できる。
+  * <img width="500" alt="スクリーンショット 2023-08-19 17 34 46" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/4e3dbdbe-6c9f-4653-88d4-9ae5ec463d75">
+  * <img width="400" alt="スクリーンショット 2023-08-19 17 35 27" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/aedc8686-8697-4185-8e52-c4646e2b2476">
   * 登録した店舗のお気に入り数を表示する。
-* コメント機能
-  * ユーザーが店舗に対してコメントを投稿できる。
-  * コメントの編集と削除
-  * コメントを表示し、コメント数を表示する。
+  * <img width="500" alt="スクリーンショット 2023-08-19 17 42 13" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/a6cbf720-99f6-4b27-bfb1-a194e70d1ba6">
+* 評価機能
+  * ユーザーが店舗に対して評価を投稿できる。
+  * <img width="500" alt="スクリーンショット 2023-08-19 17 58 40" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/d5e1ee5d-2fda-4bb1-991e-b35b2825238b">
+  * 評価を表示し、評価の編集と削除ができる。
+  * <img width="500" alt="スクリーンショット 2023-08-19 18 03 13" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/e39eb9d5-0223-42e5-8c65-faa73c2f63d8">
 * マップ表示
   * 店舗の位置情報をGoogleマップapiを使用してマップ上に表示する。
   * マップ上で各店舗のマーカーをクリックすると詳細情報を表示する
+  * <img width="500" alt="スクリーンショット 2023-08-19 18 05 34" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/616be2cf-6081-4be9-82b8-be2f3384f80c">
 * エラーハンドリング
   * 不正なリクエストやエラーが発生した場合、適切なエラーメッセージを表示する。
 * ドキュメンテーション
@@ -60,7 +74,7 @@
 8. 店舗の投稿： 店舗名、詳細説明、価格、住所、画像、営業時間などを入力し新しく投稿されます。
 
 ## ER図
-<img width="982" alt="スクリーンショット 2023-08-11 14 57 14" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/96cca02d-6a5a-43f1-b38f-abd2197330f5">
+<img width="500" alt="スクリーンショット 2023-08-11 14 57 14" src="https://github.com/kazuki-ichi/WHITE_BREAD/assets/127379118/96cca02d-6a5a-43f1-b38f-abd2197330f5">
 
 ## テスト
 * RSpec
