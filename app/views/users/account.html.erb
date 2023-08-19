@@ -59,6 +59,7 @@
 
   <div class="tab-pane fade" id="nav-favorite" role="tabpanel" aria-labelledby="nav-favorite-tab">
     <h1>お気に入り一覧</h1>
+    <p>お気に入りの合計数： <%= current_user.favorite_white_bread_stores.count %></p>
     <div class="AccountInformation__input-group">
       <% if current_user.favorite_white_bread_stores.any? %>
         <% current_user.favorite_white_bread_stores.each do |white_bread_store| %>
